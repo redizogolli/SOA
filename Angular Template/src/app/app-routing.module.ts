@@ -1,3 +1,4 @@
+import { OrariSalleDiteComponent } from './views/pages/orari-salle-dite/orari-salle-dite.component';
 // Angular
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -16,36 +17,12 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		children: [
 			{
+				path: '', // <= Page URL
+				component: OrariSalleDiteComponent // <= Page component registration
+			  },
+			{
 				path: 'dashboard',
 				loadChildren: () => import('app/views/pages/dashboard/dashboard.module').then(m => m.DashboardModule),
-			},
-			{
-				path: 'mail',
-				loadChildren: () => import('app/views/pages/apps/mail/mail.module').then(m => m.MailModule),
-			},
-			{
-				path: 'ecommerce',
-				loadChildren: () => import('app/views/pages/apps/e-commerce/e-commerce.module').then(m => m.ECommerceModule),
-			},
-			{
-				path: 'ngbootstrap',
-				loadChildren: () => import('app/views/pages/ngbootstrap/ngbootstrap.module').then(m => m.NgbootstrapModule),
-			},
-			{
-				path: 'material',
-				loadChildren: () => import('app/views/pages/material/material.module').then(m => m.MaterialModule),
-			},
-			{
-				path: 'user-management',
-				loadChildren: () => import('app/views/pages/user-management/user-management.module').then(m => m.UserManagementModule),
-			},
-			{
-				path: 'wizard',
-				loadChildren: () => import('app/views/pages/wizard/wizard.module').then(m => m.WizardModule),
-			},
-			{
-				path: 'builder',
-				loadChildren: () => import('app/views/theme/content/builder/builder.module').then(m => m.BuilderModule),
 			},
 			{
 				path: 'error/403',
