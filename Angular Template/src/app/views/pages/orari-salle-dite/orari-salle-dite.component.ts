@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./orari-salle-dite.component.scss']
 })
 export class OrariSalleDiteComponent implements OnInit {
-
+  summaries: string[] = ['Apple', 'Orange', 'Banana'];
   constructor() { }
 
   ngOnInit() {
   }
 
+  filterForeCasts(x){
+	console.log(x);
+  }
 }

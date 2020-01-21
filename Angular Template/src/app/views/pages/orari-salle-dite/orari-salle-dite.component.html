@@ -1,1 +1,31 @@
-<p>orari-salle-dite works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <label>Klasa: </label>
+            <select (change)="filterForeCasts($event.target.value)">
+				<option value="0"></option>
+				<option *ngFor="let summary of summaries" value={{summary}}>
+				{{summary}}
+				</option>
+			</select>
+        </div>
+        <div class="col-sm">
+            <label>Klasa: </label>
+            <select (change)="filterForeCasts($event.target.value)">
+				<option value="0"></option>
+				<option *ngFor="let summary of summaries" value={{summary}}>
+				{{summary}}
+				</option>
+			</select>
+        </div>
+    </div>
+    <div class="row">
+        <h4 *ngIf="summaries.length < 1">No Data</h4>
+        <table>
+
+        </table>
+    </div>
+</div>
+
+
+<!-- https://www.talkingdotnet.com/bind-select-dropdown-list-in-angular-8/ -->
