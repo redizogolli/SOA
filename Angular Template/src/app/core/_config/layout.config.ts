@@ -68,7 +68,7 @@ export class LayoutConfig {
 					arrow: true,
 					toggle: 'click',
 					submenu: {
-						skin: 'light',
+						skin: 'dark',
 						arrow: true,
 					},
 				},
@@ -97,7 +97,7 @@ export class LayoutConfig {
 		},
 		aside: {
 			self: {
-				skin: 'dark',
+				skin: 'light',
 				display: true,
 				fixed: true,
 				minimize: {
