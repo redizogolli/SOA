@@ -12,7 +12,8 @@ namespace Repository
 {
     public class GeneralRepository : IGeneralRepository
     {
-        private string _connectionString = "Server=.\\SQLEXPRESS;Database=OrariProvimeve;Trusted_Connection=True;";
+        //private string _connectionString = "Server=.\\SQLEXPRESS;Database=OrariProvimeve;Trusted_Connection=True;";
+        private string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Database=OrariProvimeve;Encrypt=False;Integrated Security=True;User ID=\"DESKTOP-T1LCAF0\\Redi Zogolli\"";
         public List<string> GetDeget()
         {
             using (var connection = new SqlConnection(_connectionString))

@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <label>Klasa: </label>
-            <select (change)="filterForeCasts($event.target.value)">
+            <label>Dita: </label>
+            <select id ="dit" (change)="DayIndexChanged($event.target.value)">
 				<option value="0"></option>
 				<option *ngFor="let dite of ditet" value={{dite.id}}>
 				{{dite.dita}}
@@ -11,21 +11,43 @@
         </div>
         <div class="col-sm">
             <label>Klasa: </label>
-            <select (change)="filterForeCasts($event.target.value)">
+            <select id ="sall" (change)="ClassIndexChanged($event.target.value)">
 				<option value="0"></option>
-				<option *ngFor="let summary of summaries" value={{summary}}>
-				{{summary}}
+				<option *ngFor="let salla of sallat" value={{salla.id}}>
+				{{salla.klasa}}
 				</option>
 			</select>
         </div>
     </div>
     <div class="row">
-        <h4 *ngIf="summaries.length < 1">No Data</h4>
-        <table>
-
+        <h4 *ngIf="orari.length < 1">No Data</h4><br>
+        <table *ngIf="orari.length > 1" class="row-border hover">
+            <thead>
+              <tr>
+                <th>Ora</th>
+                <th>Dega</th>
+                <th>Lenda</th>
+                <th>VitiLenda</th>
+                <th>VitiStudent</th>
+                <th>Paraleli</th>
+                <th>Pedagog</th>
+                <th>NrStudent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let orar of orari">
+                <td>{{ orar.Ora }}</td>
+                <td>{{ orar.Dega }}</td>
+                <td>{{ orar.Lenda }}</td>
+                <td>{{ orar.VitiLenda }}</td>
+                <td>{{ orar.VitiStudent }}</td>
+                <td>{{ orar.Paraleli }}</td>
+                <td>{{ orar.Pedagog }}</td>
+                <td>{{ orar.NrStudent }}</td>
+              </tr>
+            </tbody>
         </table>
     </div>
 </div>
-
 
 <!-- https://www.talkingdotnet.com/bind-select-dropdown-list-in-angular-8/ -->

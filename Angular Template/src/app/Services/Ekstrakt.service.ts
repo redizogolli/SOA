@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { IOrariSalle } from '../Interfaces/IOrariSalle';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,9 @@ get_Ditet() : Observable<IDita[]>{
 }
 get_Sallat(): Observable<IKlasa[]>{
 	return this.httpClient.get<IKlasa[]>(this.baseUrl + '/api/Ekstrakte/salla');
+}
+get_OrariPerSalle(dita:number,salla:number): Observable<IOrariSalle[]>{
+	return this.httpClient.get<IOrariSalle[]>(this.baseUrl + '/api/Ekstrakte/'+dita +"/"+salla+"/orari");
 }
 private handleError(error: any) {
     console.error('server error:', error);

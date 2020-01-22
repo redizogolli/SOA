@@ -97,7 +97,7 @@ export class LayoutConfig {
 		},
 		aside: {
 			self: {
-				skin: 'light',
+				skin: 'dark',
 				display: true,
 				fixed: true,
 				minimize: {
