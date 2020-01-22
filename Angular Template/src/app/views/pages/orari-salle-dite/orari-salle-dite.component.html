@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm">
             <label>Dita: </label>
-            <select id ="dit" (change)="DayIndexChanged($event.target.value)">
+            <select id="dit" (change)="DayIndexChanged($event.target.value)">
 				<option value="0"></option>
 				<option *ngFor="let dite of ditet" value={{dite.id}}>
 				{{dite.dita}}
@@ -11,7 +11,7 @@
         </div>
         <div class="col-sm">
             <label>Klasa: </label>
-            <select id ="sall" (change)="ClassIndexChanged($event.target.value)">
+            <select id="sall" (change)="ClassIndexChanged($event.target.value)">
 				<option value="0"></option>
 				<option *ngFor="let salla of sallat" value={{salla.id}}>
 				{{salla.klasa}}
@@ -20,31 +20,32 @@
         </div>
     </div>
     <div class="row">
+        {{orari | async}}
         <h4 *ngIf="orari.length < 1">No Data</h4><br>
         <table *ngIf="orari.length > 1" class="row-border hover">
             <thead>
-              <tr>
-                <th>Ora</th>
-                <th>Dega</th>
-                <th>Lenda</th>
-                <th>VitiLenda</th>
-                <th>VitiStudent</th>
-                <th>Paraleli</th>
-                <th>Pedagog</th>
-                <th>NrStudent</th>
-              </tr>
+                <tr>
+                    <th>Ora</th>
+                    <th>Dega</th>
+                    <th>Lenda</th>
+                    <th>VitiLenda</th>
+                    <th>VitiStudent</th>
+                    <th>Paraleli</th>
+                    <th>Pedagog</th>
+                    <th>NrStudent</th>
+                </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let orar of orari">
-                <td>{{ orar.ora }}</td>
-                <td>{{ orar.dega }}</td>
-                <td>{{ orar.lenda }}</td>
-                <td>{{ orar.vitiLenda }}</td>
-                <td>{{ orar.vitiStudent }}</td>
-                <td>{{ orar.paraleli }}</td>
-                <td>{{ orar.pedagog }}</td>
-                <td>{{ orar.nrStudent }}</td>
-              </tr>
+                <tr *ngFor="let orar of orari">
+                    <td>{{ orar.ora }}</td>
+                    <td>{{ orar.dega }}</td>
+                    <td>{{ orar.lenda }}</td>
+                    <td>{{ orar.vitiLenda }}</td>
+                    <td>{{ orar.vitiStudent }}</td>
+                    <td>{{ orar.paraleli }}</td>
+                    <td>{{ orar.pedagog }}</td>
+                    <td>{{ orar.nrStudent }}</td>
+                </tr>
             </tbody>
         </table>
     </div>

@@ -4,7 +4,7 @@ import { EkstraktService } from './../../../Services/Ekstrakt.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { IOrariSalle } from './../../../Interfaces/IOrariSalle';
-import { catchError, tap, map } from 'rxjs/operators';
+import {ChangeDetectorRef} from '@angular/core'
 // import 'rxjs/add/operator/map';
 
 @Component({
@@ -13,7 +13,7 @@ import { catchError, tap, map } from 'rxjs/operators';
   styleUrls: ['./orari-salle-dite.component.scss']
 })
 export class OrariSalleDiteComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
+  // dtOptions: DataTables.Settings = {};
 
    // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
@@ -26,24 +26,19 @@ export class OrariSalleDiteComponent implements OnInit {
   private selectedDay = 0;
   private selectedClass = 0;
 
+  private ref: ChangeDetectorRef;
+
   constructor(private service: EkstraktService) {
   }
 
   ngOnInit() {
-    this.LoadData();
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 2
-    };
+    this.service.get_Sallat().subscribe((Sallat: IKlasa[]) => this.sallat = Sallat);
+    this.service.get_Ditet().subscribe((Ditet: IDita[]) => this.ditet = Ditet);
+	this.ref.detectChanges();
   }
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     // this.dtTrigger.unsubscribe();
-  }
-
-  async LoadData(){
-    await this.service.get_Sallat().subscribe((Sallat: IKlasa[]) => this.sallat = Sallat);
-    await this.service.get_Ditet().subscribe((Ditet: IDita[]) => this.ditet = Ditet);
   }
 
   DayIndexChanged(value){
@@ -51,28 +46,19 @@ export class OrariSalleDiteComponent implements OnInit {
     console.log("day:"+this.selectedDay);
     if(this.selectedClass != 0 && this.selectedDay != 0)
     {
-        console.log("true");
         this.GetOrari();
     }
-    else{
-      this.orari = [];
-    }
-    console.log(this.orari);
   }
   ClassIndexChanged(value){
     this.selectedClass = value;
     console.log("class:"+this.selectedClass);
     if(this.selectedClass != 0 && this.selectedDay != 0)
     {
-      console.log("true");
       this.GetOrari();
     }
-    else{
-      this.orari = [];
-    }
-    console.log(this.orari);
   }
   GetOrari(){
-    this.service.get_OrariPerSalle(this.selectedDay,this.selectedClass).subscribe((Orar: IOrariSalle[]) => this.orari = Orar);
+	this.service.get_OrariPerSalle(this.selectedDay,this.selectedClass).subscribe((Orar: IOrariSalle[]) => this.orari = Orar);
+	this.ref.detectChanges();
   }
 }
