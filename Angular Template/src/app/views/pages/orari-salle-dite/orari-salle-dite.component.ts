@@ -4,7 +4,7 @@ import { EkstraktService } from './../../../Services/Ekstrakt.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { IOrariSalle } from './../../../Interfaces/IOrariSalle';
-
+import { catchError, tap, map } from 'rxjs/operators';
 // import 'rxjs/add/operator/map';
 
 @Component({
@@ -48,17 +48,29 @@ export class OrariSalleDiteComponent implements OnInit {
 
   DayIndexChanged(value){
     this.selectedDay = value;
+    console.log("day:"+this.selectedDay);
     if(this.selectedClass != 0 && this.selectedDay != 0)
     {
+        console.log("true");
         this.GetOrari();
     }
+    else{
+      this.orari = [];
+    }
+    console.log(this.orari);
   }
   ClassIndexChanged(value){
     this.selectedClass = value;
+    console.log("class:"+this.selectedClass);
     if(this.selectedClass != 0 && this.selectedDay != 0)
     {
+      console.log("true");
       this.GetOrari();
     }
+    else{
+      this.orari = [];
+    }
+    console.log(this.orari);
   }
   GetOrari(){
     this.service.get_OrariPerSalle(this.selectedDay,this.selectedClass).subscribe((Orar: IOrariSalle[]) => this.orari = Orar);

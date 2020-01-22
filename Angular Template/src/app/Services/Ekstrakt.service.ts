@@ -25,7 +25,8 @@ get_Sallat(): Observable<IKlasa[]>{
 	return this.httpClient.get<IKlasa[]>(this.baseUrl + '/api/Ekstrakte/salla');
 }
 get_OrariPerSalle(dita:number,salla:number): Observable<IOrariSalle[]>{
-	return this.httpClient.get<IOrariSalle[]>(this.baseUrl + '/api/Ekstrakte/'+dita +"/"+salla+"/orari");
+  console.log(this.baseUrl + '/api/Ekstrakte/'+salla +"/"+dita+"/orari");
+	return this.httpClient.get<IOrariSalle[]>(this.baseUrl + '/api/Ekstrakte/'+salla +"/"+dita+"/orari");
 }
 private handleError(error: any) {
     console.error('server error:', error);
