@@ -4,8 +4,8 @@
             <label>Klasa: </label>
             <select (change)="filterForeCasts($event.target.value)">
 				<option value="0"></option>
-				<option *ngFor="let summary of summaries" value={{summary}}>
-				{{summary}}
+				<option *ngFor="let dite of ditet" value={{dite.id}}>
+				{{dite.dita}}
 				</option>
 			</select>
         </div>

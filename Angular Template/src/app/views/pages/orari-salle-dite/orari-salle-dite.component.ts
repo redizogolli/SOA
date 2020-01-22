@@ -1,3 +1,6 @@
+import { IDita } from './../../../Interfaces/IDita';
+import { IKlasa } from './../../../Interfaces/IKlasa';
+import { EkstraktService } from './../../../Services/Ekstrakt.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,12 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrariSalleDiteComponent implements OnInit {
   summaries: string[] = ['Apple', 'Orange', 'Banana'];
-  constructor() { }
+
+  private sallat  = [];
+  private ditet= [];
+
+  constructor(private service: EkstraktService) {
+	this.service.get_Sallat().subscribe((Sallat: IKlasa[]) => this.sallat = Sallat);
+	this.service.get_Ditet().subscribe((Ditet: IDita[]) => this.ditet = Ditet);
+  }
 
   ngOnInit() {
   }
 
   filterForeCasts(x){
-	console.log(x);
+	console.log(this.sallat[0].klasa);
   }
 }
