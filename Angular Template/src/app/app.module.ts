@@ -62,6 +62,8 @@ import * as xml from 'highlight.js/lib/languages/xml';
 import * as json from 'highlight.js/lib/languages/json';
 
 import { DataTablesModule } from 'angular-datatables';
+import { AgGridModule } from 'ag-grid-angular';
+import { OrariSalleDiteComponent } from './views/pages/orari-salle-dite/orari-salle-dite.component';
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -92,6 +94,7 @@ export function hljsLanguages(): HighlightLanguage[] {
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
+		AgGridModule.withComponents([]),
 		BrowserAnimationsModule,
 		DataTablesModule,
 		BrowserModule,

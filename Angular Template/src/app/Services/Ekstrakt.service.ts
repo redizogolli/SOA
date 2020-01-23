@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { IOrariSalle } from '../Interfaces/IOrariSalle';
-import { OrariSalle } from '../Interfaces/OrariSalle';
 
 @Injectable({
   providedIn: 'root'

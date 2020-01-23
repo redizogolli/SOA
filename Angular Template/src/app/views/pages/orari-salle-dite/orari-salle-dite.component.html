@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row">
+    <div class="row" style="margin-bottom: 8px;background-color: white; padding: 8px; padding-top: 14px; border-radius: 4px;">
         <div class="col-sm">
             <label>Dita: </label>
             <select id="dit" (change)="DayIndexChanged($event.target.value)">
@@ -19,36 +19,16 @@
 			</select>
         </div>
     </div>
-    <div class="row">
-        {{orari | async}}
-        <h4 *ngIf="orari.length < 1">No Data</h4><br>
-        <table *ngIf="orari.length > 1" class="row-border hover">
-            <thead>
-                <tr>
-                    <th>Ora</th>
-                    <th>Dega</th>
-                    <th>Lenda</th>
-                    <th>VitiLenda</th>
-                    <th>VitiStudent</th>
-                    <th>Paraleli</th>
-                    <th>Pedagog</th>
-                    <th>NrStudent</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let orar of orari">
-                    <td>{{ orar.ora }}</td>
-                    <td>{{ orar.dega }}</td>
-                    <td>{{ orar.lenda }}</td>
-                    <td>{{ orar.vitiLenda }}</td>
-                    <td>{{ orar.vitiStudent }}</td>
-                    <td>{{ orar.paraleli }}</td>
-                    <td>{{ orar.pedagog }}</td>
-                    <td>{{ orar.nrStudent }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="row">
+            <ag-grid-angular
+                style="width: 100%; height: 700px;"
+                class="ag-theme-balham"
+                [gridOptions]="gridOptions"
+                [rowData]="orari"
+                (gridReady)="onGridReady($event)"
+                >
+            </ag-grid-angular>
+        </div>
 </div>
 
 <!-- https://www.talkingdotnet.com/bind-select-dropdown-list-in-angular-8/ -->
