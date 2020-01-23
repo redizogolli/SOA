@@ -19,19 +19,5 @@ export class PedagogService {
   get_PedagogOrari(name:string): Observable<IOrariPedagog[]>{
     return this.httpClient.get<IOrariPedagog[]>(this.baseUrl + '/api/Pedagog/'+name+'/orari');
   }
-
-  private handleError(error: any) {
-    console.error('server error:', error);
-    if (error.error instanceof Error) 
-    {
-        const errMessage = error.error.message;
-        // tslint:disable-next-line: deprecation
-        return Observable.throw(errMessage);
-        // Use the following instead if using lite-server
-        // return Observable.throw(err.text() || 'backend server error');
-    }
-        // tslint:disable-next-line: deprecation
-      return Observable.throw(error || 'Node.js server error');
-  }
 }
 

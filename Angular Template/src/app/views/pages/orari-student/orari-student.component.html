@@ -1,1 +1,41 @@
-<p>orari-student works!</p>
+<div class="container">
+    <div class="row" style="margin-bottom: 8px;background-color: white; padding: 8px; padding-top: 14px; border-radius: 4px;">
+        <div class="col-sm">
+            <label>Dega: </label>
+            <select (change)="PedagogIndexChanged($event.target.value)">
+				<option value="0"></option>
+				<option *ngFor="let pedag of pedagog" value={{pedag}}>
+				{{pedag}}
+				</option>
+			</select>
+        </div>
+        <div class="col-sm">
+            <label>Viti: </label>
+            <select (change)="PedagogIndexChanged($event.target.value)">
+				<option value="0"></option>
+				<option *ngFor="let pedag of pedagog" value={{pedag}}>
+				{{pedag}}
+				</option>
+			</select>
+        </div>
+        <div class="col-sm">
+            <label>Parali: </label>
+            <select (change)="PedagogIndexChanged($event.target.value)">
+				<option value="0"></option>
+				<option *ngFor="let pedag of pedagog" value={{pedag}}>
+				{{pedag}}
+				</option>
+			</select>
+        </div>
+    </div>
+        <div class="row">
+            <ag-grid-angular
+                style="width: 100%; height: 700px;"
+                class="ag-theme-balham"
+                [gridOptions]="gridOptions"
+                [rowData]="pedagogOrari"
+                (gridReady)="onGridReady($event)"
+                >
+            </ag-grid-angular>
+        </div>
+</div>
