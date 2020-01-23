@@ -7,9 +7,11 @@ import { PartialsModule } from '../partials/partials.module';
 import { CoreModule } from '../../core/core.module';
 import { OrariSalleDiteComponent } from './orari-salle-dite/orari-salle-dite.component';
 import { AgGridModule } from 'ag-grid-angular';
+import { OrariPedagogComponent } from './orari-pedagog/orari-pedagog.component';
+import { OrariStudentComponent } from './orari-student/orari-student.component';
 
 @NgModule({
-	declarations: [OrariSalleDiteComponent],
+	declarations: [OrariSalleDiteComponent, OrariPedagogComponent, OrariStudentComponent],
 	exports: [],
 	imports: [
 		AgGridModule.withComponents([]),

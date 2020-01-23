@@ -17,11 +17,11 @@ export class MenuConfig {
 					submenu: [
 						{
 							title: 'Pedagog',
-							page: '/material/form-controls/autocomplete',
+							page: '/provimePedagog',
 						},
 						{
 							title: 'Student',
-							page: '/material/form-controls/autocomplete',
+							page: '/orariProvimeveStudent',
 						},
 						{
 							title: 'Salle Dite',

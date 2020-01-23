@@ -7,6 +7,8 @@ import {BaseComponent} from './views/theme/base/base.component';
 import {ErrorPageComponent} from './views/theme/content/error-page/error-page.component';
 // Auth
 import {AuthGuard} from './core/auth';
+import { OrariPedagogComponent } from './views/pages/orari-pedagog/orari-pedagog.component';
+import { OrariStudentComponent } from './views/pages/orari-student/orari-student.component';
 
 const routes: Routes = [
 	{path: 'auth', loadChildren: () => import('./views/pages/auth/auth.module').then(m => m.AuthModule)},
@@ -16,9 +18,17 @@ const routes: Routes = [
 		component: BaseComponent,
 		canActivate: [AuthGuard],
 		children: [
-			{
+			  {
 				path: '', // <= Page URL
 				component: OrariSalleDiteComponent // <= Page component registration
+			  },
+			  {
+				path: 'provimePedagog', // <= Page URL
+				component: OrariPedagogComponent // <= Page component registration
+			  },
+			  {
+				path: 'orariProvimeveStudent', // <= Page URL
+				component: OrariStudentComponent // <= Page component registration
 			  },
 			{
 				path: 'dashboard',
