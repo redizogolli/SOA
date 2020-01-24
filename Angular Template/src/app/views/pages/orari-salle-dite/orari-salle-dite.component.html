@@ -4,7 +4,7 @@
             <label>Dita: </label>
             <select id="dit" (change)="DayIndexChanged($event.target.value)">
 				<option value="0"></option>
-				<option *ngFor="let dite of ditet" value={{dite.id}}>
+				<option *ngFor="let dite of ditetObservable | async" value={{dite.id}}>
 				{{dite.dita}}
 				</option>
 			</select>
@@ -13,7 +13,7 @@
             <label>Klasa: </label>
             <select id="sall" (change)="ClassIndexChanged($event.target.value)">
 				<option value="0"></option>
-				<option *ngFor="let salla of sallat" value={{salla.id}}>
+				<option *ngFor="let salla of sallatObservable | async" value={{salla.id}}>
 				{{salla.klasa}}
 				</option>
 			</select>

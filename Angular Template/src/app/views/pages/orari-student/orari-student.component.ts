@@ -28,14 +28,17 @@ export class OrariStudentComponent implements OnInit {
 
 	orari = [];
 
-	degetArray = [];
-	vitetArray = [];
-	paraleliArray = [];
+	degetObservable;
+	vitetObservable;
+  paraleliObservable;
+  
+  test = this.service.getVitPerDege("Bachelor në \"Biologji\"");
 
 	selectedDege:string;
 	selectedVit:number;
 	selectedParalel:string;
 
+  receivedData = [];
 
   constructor(public service: StudentService) {
 	this.gridOptions = {
@@ -48,7 +51,7 @@ export class OrariStudentComponent implements OnInit {
 		  params.api.sizeColumnsToFit();
 		}
 	  };
-	  this.service.getDeget().subscribe((data) =>this.degetArray = data);
+	  this.degetObservable = this.service.getDeget();
   }
 
   onGridReady(params) {
@@ -60,15 +63,17 @@ export class OrariStudentComponent implements OnInit {
   }
 
   DegaIndexChanged(value){
-	  	// this.vitetArray = [];
-		this.selectedDege = value;
-		this.service.getVitPerDege(this.selectedDege).subscribe((data) => this.vitetArray = data);
+    this.selectedDege = value;
+    this.selectedVit = 0;
+    this.selectedParalel = "";
+    this.vitetObservable=this.service.getVitPerDege(this.selectedDege);
+    this.paraleliObservable = this.service.getParalelPerVitDege(this.selectedDege,this.selectedVit);
   }
 
   VitIndexChanged(value){
-		// this.paraleliArray = [];
-		this.selectedVit = value;
-		this.service.getParalelPerVitDege(this.selectedDege,this.selectedVit).subscribe((data) => this.paraleliArray = data);
+    this.selectedVit = value;
+    this.selectedParalel = "";
+		this.paraleliObservable=this.service.getParalelPerVitDege(this.selectedDege,this.selectedVit);
   }
 
   ParalelIndexChanged(value){

@@ -4,7 +4,7 @@
             <label>Dega: </label>
             <select (change)="DegaIndexChanged($event.target.value)">
 				<option value="0"></option>
-				<option *ngFor="let dega of degetArray" value={{dega}}>
+				<option *ngFor="let dega of degetObservable | async" value={{dega}}>
 				{{dega}}
 				</option>
 			</select>
@@ -13,7 +13,7 @@
             <label>Viti: </label>
             <select (change)="VitIndexChanged($event.target.value)">
 				<option value="0"></option>
-				<option *ngFor="let vit of vitetArray" value={{vit}}>
+				<option *ngFor="let vit of vitetObservable | async" value={{vit}}>
 				{{vit}}
 				</option>
 			</select>
@@ -22,7 +22,7 @@
             <label>Parali: </label>
             <select (change)="ParalelIndexChanged($event.target.value)">
 				<option value="0"></option>
-				<option *ngFor="let paralel of paraleliArray" value={{paralel}}>
+				<option *ngFor="let paralel of paraleliObservable | async" value={{paralel}}>
 				{{paralel}}
 				</option>
 			</select>

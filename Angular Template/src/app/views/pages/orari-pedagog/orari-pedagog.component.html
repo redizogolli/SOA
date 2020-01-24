@@ -4,7 +4,7 @@
             <label>Pedagog: </label>
             <select (change)="PedagogIndexChanged($event.target.value)">
 				<option value="0"></option>
-				<option *ngFor="let pedag of pedagog" value={{pedag}}>
+				<option *ngFor="let pedag of pedagogObservable | async" value={{pedag}}>
 				{{pedag}}
 				</option>
 			</select>

@@ -1,14 +1,8 @@
 import { IDita } from './../../../Interfaces/IDita';
 import { IKlasa } from './../../../Interfaces/IKlasa';
 import { EkstraktService } from './../../../Services/Ekstrakt.service';
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { IOrariSalle } from './../../../Interfaces/IOrariSalle';
-import {ChangeDetectorRef} from '@angular/core'
-import { AgGridAngular } from 'ag-grid-angular';
-import { GridOptions, FirstDataRenderedEvent, RowDataChangedEvent, GridReadyEvent, GridApi } from 'ag-grid-community';
-// import 'rxjs/add/operator/map';
+import { Component, OnInit } from '@angular/core';
+import { GridOptions} from 'ag-grid-community';
 
 @Component({
   selector: 'kt-orari-salle-dite',
@@ -25,10 +19,9 @@ export class OrariSalleDiteComponent implements OnInit {
     this.gridApi = params.api;
     params.api.sizeColumnsToFit();
   }
-  sallat  = [];
-  ditet= [];
-  
-  subscription: Subscription[];
+  sallatObservable;
+  ditetObservable;
+
   columnDefs = [
     {headerName: 'Ora', field: 'ora' },
     {headerName: 'Dega', field: 'dega' },
@@ -44,8 +37,7 @@ export class OrariSalleDiteComponent implements OnInit {
   private selectedClass = 0;
 
   
-  constructor(public service: EkstraktService, private ref: ChangeDetectorRef) {
-    this.subscription = [];
+  constructor(public service: EkstraktService) {
     this.gridOptions = {
       columnDefs: this.columnDefs,
       enableFilter: true,
@@ -56,33 +48,22 @@ export class OrariSalleDiteComponent implements OnInit {
         params.api.sizeColumnsToFit();
       }
     };
-    this.service.get_Sallat().subscribe((Sallat: IKlasa[]) => this.sallat = Sallat);
-    this.service.get_Ditet().subscribe((Ditet: IDita[]) => this.ditet = Ditet);
+    this.sallatObservable = this.service.get_Sallat();
+    this.ditetObservable= this.service.get_Ditet();
   }
 
   ngOnInit() {
   }
-  ngOnDestroy(): void {
-  }
 
   DayIndexChanged(value){
     this.selectedDay = value;
-    console.log("day:"+this.selectedDay);
-    if(this.selectedClass != 0 && this.selectedDay != 0)
-    {
-        this.GetOrari();
-    }
+    this.GetOrari();
   }
   ClassIndexChanged(value){
     this.selectedClass = value;
-    console.log("class:"+this.selectedClass);
-    if(this.selectedClass != 0 && this.selectedDay != 0)
-    {
-      this.GetOrari();
-    }
+    this.GetOrari();
   }
   GetOrari(){
-  // this.service.get_OrariPerSalle(this.selectedDay,this.selectedClass).subscribe((Orar: IOrariSalle[]) => this.orari = Orar);
   this.service.get_OrariPerSalle(this.selectedDay,this.selectedClass).subscribe((data) => {
     this.orari = data;
     this.gridApi.setRowData(data);

@@ -9,7 +9,7 @@ import { GridOptions } from 'ag-grid-community';
   styleUrls: ['./orari-pedagog.component.scss']
 })
 export class OrariPedagogComponent implements OnInit {
-  pedagog = [];
+  pedagogObservable;
   pedagogOrari = [];
   selectedPedagogName:string;
 
@@ -41,7 +41,7 @@ export class OrariPedagogComponent implements OnInit {
       }
     };
 
-      this.service.get_PedagogNames().subscribe((data) => this.pedagog=data);
+    this.pedagogObservable = this.service.get_PedagogNames();
   }
 
   ngOnInit() {
