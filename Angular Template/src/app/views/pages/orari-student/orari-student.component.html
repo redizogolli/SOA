@@ -11,8 +11,8 @@
         </div>
         <div class="col-sm">
             <label>Viti: </label>
-            <select (change)="VitIndexChanged($event.target.value)">
-				<option value="0"></option>
+            <select (change)="VitIndexChanged($event.target.value)" style="width: 70px;text-align-last: right;">
+			<option value="0"></option>
 				<option *ngFor="let vit of vitetObservable | async" value={{vit}}>
 				{{vit}}
 				</option>
@@ -20,7 +20,7 @@
         </div>
         <div class="col-sm">
             <label>Parali: </label>
-            <select (change)="ParalelIndexChanged($event.target.value)">
+            <select (change)="ParalelIndexChanged($event.target.value)" style="width: 70px;">
 				<option value="0"></option>
 				<option *ngFor="let paralel of paraleliObservable | async" value={{paralel}}>
 				{{paralel}}

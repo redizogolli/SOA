@@ -31,7 +31,7 @@ export class OrariStudentComponent implements OnInit {
 	degetObservable;
 	vitetObservable;
   paraleliObservable;
-  
+
   test = this.service.getVitPerDege("Bachelor në \"Biologji\"");
 
 	selectedDege:string;
@@ -46,6 +46,7 @@ export class OrariStudentComponent implements OnInit {
 		enableFilter: true,
 		enableSorting: true,
 		pagination: true,
+		rowData:[],
 
 		onFirstDataRendered(params) {
 		  params.api.sizeColumnsToFit();

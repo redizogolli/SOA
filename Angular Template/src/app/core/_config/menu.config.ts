@@ -16,16 +16,16 @@ export class MenuConfig {
 					bullet: 'dot',
 					submenu: [
 						{
+							title: 'Salle Dite',
+							page: '/',
+						},
+						{
 							title: 'Pedagog',
 							page: '/provimePedagog',
 						},
 						{
 							title: 'Student',
 							page: '/orariProvimeveStudent',
-						},
-						{
-							title: 'Salle Dite',
-							page: '/',
 						},
 					]
 				},

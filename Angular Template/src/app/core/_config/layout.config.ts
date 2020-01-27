@@ -10,10 +10,10 @@ export class LayoutConfig {
 				'background-image': './assets/media/misc/bg-1.jpg',
 			},
 			logo: {
-				dark: './assets/media/logos/logo-light.png',
+				dark: './assets/media/logos/logo-dark.png',
 				light: './assets/media/logos/logo-dark.png',
-				brand: './assets/media/logos/logo-light.png',
-				green: './assets/media/logos/logo-light.png',
+				brand: './assets/media/logos/logo-dark.png',
+				green: './assets/media/logos/logo-dark.png',
 			},
 		},
 		// == Page Splash Screen loading
@@ -68,13 +68,13 @@ export class LayoutConfig {
 					arrow: true,
 					toggle: 'click',
 					submenu: {
-						skin: 'dark',
+						skin: 'light',
 						arrow: true,
 					},
 				},
 				mobile: {
 					submenu: {
-						skin: 'dark',
+						skin: 'light',
 						accordion: true,
 					},
 				},
@@ -92,12 +92,12 @@ export class LayoutConfig {
 		},
 		brand: {
 			self: {
-				skin: 'dark',
+				skin: 'light',
 			},
 		},
 		aside: {
 			self: {
-				skin: 'dark',
+				skin: 'light',
 				display: true,
 				fixed: true,
 				minimize: {

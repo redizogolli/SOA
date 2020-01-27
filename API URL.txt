@@ -1,9 +1,0 @@
-api/pedagog ->te gjithe pedagoget
-api/pedagog/emri/orari -> merrOraret per pedagog
-api/student/orari -> orari per student
-api/student/orari/paraleli ose  api/student/orari/{dege}/{vit}/paraleli->paraleli per student
-api/student/orari/dege ->deget
-api/student/orari/vit ose api/student/orari/{dege}/vit ->vitet per dege
-api/ekstrakt/data ->merr sallat
-api/ekstrakt/klasa -> merr klasat
-api/ekstrakt/orari ->merr orarin
