@@ -7,6 +7,8 @@ namespace Contracts
 {
     public interface IGeneralRepository
     {
+        bool isSetConnectionString();
+        void SetConnectionString(string connectionString);
         List<string> GetDeget();
         List<DitaDto> GetDitet();
         List<KlasaDto> GetKlasa();

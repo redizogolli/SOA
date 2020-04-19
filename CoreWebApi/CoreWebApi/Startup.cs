@@ -56,6 +56,9 @@ namespace CoreWebApi
                 c.IncludeXmlComments(xmlFile);
             });
 
+            // Add the whole configuration object here.
+            services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddScoped<IGeneralRepository, GeneralRepository>();
 
             services.AddControllers();
@@ -72,6 +75,8 @@ namespace CoreWebApi
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+
+            app.UseFileServer(enableDirectoryBrowsing: true);
 
             app.UseCors("CorsPolicy");
 

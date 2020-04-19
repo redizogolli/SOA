@@ -12,8 +12,18 @@ namespace Repository
 {
     public class GeneralRepository : IGeneralRepository
     {
-        private string _connectionString = "Server=.\\SQLEXPRESS;Database=OrariProvimeve;Trusted_Connection=True;";
+        public string _connectionString = string.Empty;
         //private string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Database=OrariProvimeve;Encrypt=False;Integrated Security=True;User ID=\"DESKTOP-T1LCAF0\\Redi Zogolli\"";
+
+
+        public bool isSetConnectionString()
+        {
+            return _connectionString != string.Empty;
+        }
+        public void SetConnectionString(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         public List<string> GetDeget()
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -115,5 +125,6 @@ namespace Repository
                 return list;
             }
         }
+
     }
 }

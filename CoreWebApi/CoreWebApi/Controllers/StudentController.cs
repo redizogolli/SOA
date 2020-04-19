@@ -7,6 +7,7 @@ using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.InputDto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
 namespace CoreWebApi.Controllers
@@ -16,9 +17,13 @@ namespace CoreWebApi.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IGeneralRepository _repository;
-        public StudentController(IGeneralRepository repository)
+        private readonly IConfiguration _configuration;
+        public StudentController(IGeneralRepository repository, IConfiguration configuration)
         {
             _repository = repository;
+            _configuration = configuration;
+            if (!_repository.isSetConnectionString())
+                _repository.SetConnectionString(configuration.GetConnectionString("DefaultConnection"));
         }
         /// <summary>
         /// Merr gjithe deget

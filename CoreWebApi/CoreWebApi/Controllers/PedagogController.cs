@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace CoreWebApi.Controllers
 {
@@ -13,9 +14,13 @@ namespace CoreWebApi.Controllers
     public class PedagogController : ControllerBase
     {
         private readonly IGeneralRepository _repository;
-        public PedagogController(IGeneralRepository repository)
+        private readonly IConfiguration _configuration;
+        public PedagogController(IGeneralRepository repository, IConfiguration configuration)
         {
             _repository = repository;
+            _configuration = configuration;
+            if (!_repository.isSetConnectionString())
+                _repository.SetConnectionString(configuration.GetConnectionString("DefaultConnection"));
         }
 
         /// <summary>
