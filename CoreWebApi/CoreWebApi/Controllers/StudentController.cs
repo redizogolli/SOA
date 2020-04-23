@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Contracts;
-using Entities.DataTransferObjects;
-using Entities.DataTransferObjects.InputDto;
-using Microsoft.AspNetCore.Http;
+﻿using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace CoreWebApi.Controllers
 {
@@ -18,12 +13,22 @@ namespace CoreWebApi.Controllers
     {
         private readonly IGeneralRepository _repository;
         private readonly IConfiguration _configuration;
-        public StudentController(IGeneralRepository repository, IConfiguration configuration)
+        private readonly IHelper _helper;
+        private readonly ILogger _logger;
+        public StudentController(IGeneralRepository repository, IConfiguration configuration, IHelper helper, ILogger<StudentController> logger)
         {
             _repository = repository;
             _configuration = configuration;
+            _helper = helper;
+            _logger = logger;
             if (!_repository.isSetConnectionString())
-                _repository.SetConnectionString(configuration.GetConnectionString("DefaultConnection"));
+            {
+                var dbType = _helper.GetDbType(configuration.GetSection("DatabaseType").Value);
+                if (dbType == Contracts.Utils.enums.DbTypes.NotSupported)
+                    _logger.LogError($"Database {configuration.GetSection("DatabaseType").Value} isn't supported");
+                else
+                    _repository.SetConnectionString(configuration.GetConnectionString("DefaultConnection"), dbType);
+            }
         }
         /// <summary>
         /// Merr gjithe deget
@@ -39,6 +44,7 @@ namespace CoreWebApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -57,6 +63,7 @@ namespace CoreWebApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -75,6 +82,7 @@ namespace CoreWebApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -93,6 +101,7 @@ namespace CoreWebApi.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 return StatusCode(500, "Internal server error");
             }
         }

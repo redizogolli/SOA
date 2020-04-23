@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities.DataTransferObjects.InputDto
+﻿namespace Entities.DataTransferObjects.InputDto
 {
     public class OrariStudentInputDto
     {

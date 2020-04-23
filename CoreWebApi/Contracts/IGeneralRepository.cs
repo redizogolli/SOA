@@ -1,14 +1,13 @@
 ﻿using Entities.DataTransferObjects;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using static Contracts.Utils.enums;
 
 namespace Contracts
 {
     public interface IGeneralRepository
     {
         bool isSetConnectionString();
-        void SetConnectionString(string connectionString);
+        void SetConnectionString(string connectionString, DbTypes dbType);
         List<string> GetDeget();
         List<DitaDto> GetDitet();
         List<KlasaDto> GetKlasa();

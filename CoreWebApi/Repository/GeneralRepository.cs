@@ -1,32 +1,37 @@
 ﻿using Contracts;
 using Dapper;
 using Entities.DataTransferObjects;
-using Microsoft.Data.SqlClient;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
+using static Contracts.Utils.enums;
 
 namespace Repository
 {
     public class GeneralRepository : IGeneralRepository
     {
-        public string _connectionString = string.Empty;
+        private string _connectionString = string.Empty;
+        private IHelper _helper;
+        private DbTypes _dbType;
         //private string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Database=OrariProvimeve;Encrypt=False;Integrated Security=True;User ID=\"DESKTOP-T1LCAF0\\Redi Zogolli\"";
 
+        public GeneralRepository(IHelper helper)
+        {
+            _helper = helper;
+        }
 
         public bool isSetConnectionString()
         {
             return _connectionString != string.Empty;
         }
-        public void SetConnectionString(string connectionString)
+        public void SetConnectionString(string connectionString, DbTypes dbType)
         {
             _connectionString = connectionString;
+            _dbType = dbType;
         }
         public List<string> GetDeget()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
                 var list = connection.Query<string>("GetDeget", commandType: CommandType.StoredProcedure).ToList();
@@ -36,20 +41,20 @@ namespace Repository
 
         public List<DitaDto> GetDitet()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
-                var list = connection.Query<DitaDto>("dbo.GetDitet", commandType: CommandType.StoredProcedure).ToList();
+                var list = connection.Query<DitaDto>("GetDitet", commandType: CommandType.StoredProcedure).ToList();
                 return list;
             }
         }
 
         public List<KlasaDto> GetKlasa()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
-                var list = connection.Query<KlasaDto>("dbo.GetKlasa", commandType: CommandType.StoredProcedure).ToList();
+                var list = connection.Query<KlasaDto>("GetKlasa", commandType: CommandType.StoredProcedure).ToList();
                 return list;
             }
         }
@@ -59,10 +64,10 @@ namespace Repository
             var parameters = new DynamicParameters();
             parameters.Add("@klasa", klasa);
             parameters.Add("@dita", dita);
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
-                var list = connection.Query<OrariDateKlaseDto>("dbo.GetOrariByKlaseAndDate", param: parameters, commandType: CommandType.StoredProcedure).ToList();
+                var list = connection.Query<OrariDateKlaseDto>("GetOrariByKlaseAndDate", param: parameters, commandType: CommandType.StoredProcedure).ToList();
                 return list;
             }
         }
@@ -73,10 +78,10 @@ namespace Repository
             parameters.Add("@dega", dega);
             parameters.Add("@viti", viti);
             parameters.Add("@paraleli", paraleli);
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
-                var list = connection.Query<OrariStudentDto>("dbo.GetOrariByDegeVitParalel", param: parameters, commandType: CommandType.StoredProcedure).ToList();
+                var list = connection.Query<OrariStudentDto>("GetOrariByDegeVitParalel", param: parameters, commandType: CommandType.StoredProcedure).ToList();
                 return list;
             }
         }
@@ -85,10 +90,10 @@ namespace Repository
         {
             var parameters = new DynamicParameters();
             parameters.Add("@Emri", emri);
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
-                var list = connection.Query<OrarPedagogDto>("dbo.provimePedagog", param: parameters, commandType: CommandType.StoredProcedure).ToList();
+                var list = connection.Query<OrarPedagogDto>("provimePedagog", param: parameters, commandType: CommandType.StoredProcedure).ToList();
                 return list;
             }
         }
@@ -98,30 +103,30 @@ namespace Repository
             var parameters = new DynamicParameters();
             parameters.Add("@dega", dega);
             parameters.Add("@vit", viti);
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
-                var list = connection.Query<string>("dbo.GetParaleli", param: parameters, commandType: CommandType.StoredProcedure).ToList();
+                var list = connection.Query<string>("GetParaleli", param: parameters, commandType: CommandType.StoredProcedure).ToList();
                 return list;
             }
         }
 
         public List<string> GetPedagog()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
-                var list = connection.Query<string>("dbo.GetPedagog", commandType: CommandType.StoredProcedure).ToList();
+                var list = connection.Query<string>("GetPedagog", commandType: CommandType.StoredProcedure).ToList();
                 return list;
             }
         }
 
         public List<int> GetVitetPerDege(string dega)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = _helper.GetDbConnection(_dbType, _connectionString))
             {
                 connection.Open();
-                var list = connection.Query<int>("dbo.GetVitetPerDege", param: new { dega = dega }, commandType: CommandType.StoredProcedure).ToList();
+                var list = connection.Query<int>("GetVitetPerDege", param: new { dega = dega }, commandType: CommandType.StoredProcedure).ToList();
                 return list;
             }
         }

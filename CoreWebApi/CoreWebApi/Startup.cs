@@ -1,23 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
 using Contracts;
-using Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Repository;
+using System.IO;
 
 namespace CoreWebApi
 {
@@ -56,21 +47,25 @@ namespace CoreWebApi
                 c.IncludeXmlComments(xmlFile);
             });
 
+
             // Add the whole configuration object here.
             services.AddSingleton<IConfiguration>(Configuration);
-
+            services.AddSingleton<IHelper, Helper>();
             services.AddScoped<IGeneralRepository, GeneralRepository>();
 
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // other code remove for clarity 
+            loggerFactory.AddFile("Logs/mylog-{Date}.txt");
 
             app.UseHttpsRedirection();
 
